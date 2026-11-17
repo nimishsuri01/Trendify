@@ -9,7 +9,15 @@ export async function api<T>(path: string, options: RequestInit = {}, token?: st
     headers: { "Content-Type": "application/json", ...(token ? { Authorization: `Bearer ${token}` } : {}), ...(options.headers ?? {}) },
   });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) throw new Error(data.detail ?? "Something went wrong");
+  if (!response.ok) {
+    let msg = "Something went wrong";
+    if (typeof data.detail === "string") {
+      msg = data.detail;
+    } else if (Array.isArray(data.detail) && data.detail.length > 0) {
+      msg = data.detail.map((d: any) => d.msg || d.message || JSON.stringify(d)).join("; ");
+    }
+    throw new Error(msg);
+  }
   return data as T;
 }
 

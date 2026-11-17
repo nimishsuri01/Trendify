@@ -86,7 +86,7 @@ export default function AccountScreen() {
                     <TextInput value={form.name} onChangeText={(value: string) => setForm({ ...form, name: value })} placeholder="Full name" placeholderTextColor={colors.muted} style={styles.input} />
                 ) : null}
                 <TextInput value={form.email} onChangeText={(value: string) => setForm({ ...form, email: value })} placeholder="Email address" placeholderTextColor={colors.muted} style={styles.input} autoCapitalize="none" keyboardType="email-address" />
-                <TextInput value={form.password} onChangeText={(value: string) => setForm({ ...form, password: value })} placeholder="Password" placeholderTextColor={colors.muted} style={styles.input} secureTextEntry />
+                <TextInput value={form.password} onChangeText={(value: string) => setForm({ ...form, password: value })} placeholder="Password (min 8 characters)" placeholderTextColor={colors.muted} style={styles.input} secureTextEntry />
                 <Pressable
                     disabled={busy}
                     onPress={async () => {
@@ -108,7 +108,7 @@ export default function AccountScreen() {
                 <Pressable onPress={() => setMode(mode === "login" ? "register" : "login")} style={styles.switch}>
                     <Text style={styles.switchText}>{mode === "login" ? "New to TRENDIFY? Create an account" : "Already have an account? Sign in"}</Text>
                 </Pressable>
-                <Text style={styles.demo}>Demo admin: admin@trendify.com</Text>
+                <Text style={styles.demo}>Demo admin: admin@trendify.com | Pass: TrendifyAdmin!2026</Text>
             </ScrollView>
         );
     }
